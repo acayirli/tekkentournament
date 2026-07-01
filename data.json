@@ -1528,13 +1528,267 @@
             }
           ],
           "crownOverrides": {}
+        },
+        {
+          "id": "kotkajtmmr2iwfrc",
+          "name": "Turnier 7",
+          "createdAt": "2026-07-01T20:23:32.040Z",
+          "isFinalized": true,
+          "players": [
+            {
+              "id": "853qbmfqmr2iwgwc",
+              "name": "Abdul",
+              "selectedCharacterIds": [
+                "lidia",
+                "bryan",
+                "nina"
+              ]
+            },
+            {
+              "id": "ecuotzbbmr2iwhzc",
+              "name": "Lokman",
+              "selectedCharacterIds": [
+                "hwoarang",
+                "bryan",
+                "law"
+              ]
+            },
+            {
+              "id": "zd160gtsmr2iwjuj",
+              "name": "Selim",
+              "selectedCharacterIds": [
+                "jin",
+                "steve",
+                "heihachi"
+              ]
+            }
+          ],
+          "matches": [
+            {
+              "id": "match-1782937420085-0",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "ecuotzbbmr2iwhzc",
+              "character1Id": "lidia",
+              "character2Id": "hwoarang",
+              "winnerId": "ecuotzbbmr2iwhzc"
+            },
+            {
+              "id": "match-1782937420085-1",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "ecuotzbbmr2iwhzc",
+              "character1Id": "lidia",
+              "character2Id": "bryan",
+              "winnerId": "853qbmfqmr2iwgwc"
+            },
+            {
+              "id": "match-1782937420085-2",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "ecuotzbbmr2iwhzc",
+              "character1Id": "lidia",
+              "character2Id": "law",
+              "winnerId": "853qbmfqmr2iwgwc"
+            },
+            {
+              "id": "match-1782937420085-3",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "ecuotzbbmr2iwhzc",
+              "character1Id": "bryan",
+              "character2Id": "hwoarang",
+              "winnerId": "ecuotzbbmr2iwhzc"
+            },
+            {
+              "id": "match-1782937420085-4",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "ecuotzbbmr2iwhzc",
+              "character1Id": "bryan",
+              "character2Id": "bryan",
+              "winnerId": "853qbmfqmr2iwgwc"
+            },
+            {
+              "id": "match-1782937420085-5",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "ecuotzbbmr2iwhzc",
+              "character1Id": "bryan",
+              "character2Id": "law",
+              "winnerId": "853qbmfqmr2iwgwc"
+            },
+            {
+              "id": "match-1782937420085-6",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "ecuotzbbmr2iwhzc",
+              "character1Id": "nina",
+              "character2Id": "hwoarang",
+              "winnerId": "ecuotzbbmr2iwhzc"
+            },
+            {
+              "id": "match-1782937420085-7",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "ecuotzbbmr2iwhzc",
+              "character1Id": "nina",
+              "character2Id": "bryan",
+              "winnerId": "853qbmfqmr2iwgwc"
+            },
+            {
+              "id": "match-1782937420085-8",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "ecuotzbbmr2iwhzc",
+              "character1Id": "nina",
+              "character2Id": "law",
+              "winnerId": "ecuotzbbmr2iwhzc"
+            },
+            {
+              "id": "match-1782937420085-9",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "lidia",
+              "character2Id": "jin",
+              "winnerId": "853qbmfqmr2iwgwc"
+            },
+            {
+              "id": "match-1782937420085-10",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "lidia",
+              "character2Id": "steve",
+              "winnerId": "853qbmfqmr2iwgwc"
+            },
+            {
+              "id": "match-1782937420085-11",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "lidia",
+              "character2Id": "heihachi",
+              "winnerId": "zd160gtsmr2iwjuj"
+            },
+            {
+              "id": "match-1782937420085-12",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "bryan",
+              "character2Id": "jin",
+              "winnerId": "zd160gtsmr2iwjuj"
+            },
+            {
+              "id": "match-1782937420085-13",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "bryan",
+              "character2Id": "steve",
+              "winnerId": "zd160gtsmr2iwjuj"
+            },
+            {
+              "id": "match-1782937420085-14",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "bryan",
+              "character2Id": "heihachi",
+              "winnerId": "zd160gtsmr2iwjuj"
+            },
+            {
+              "id": "match-1782937420085-15",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "nina",
+              "character2Id": "jin",
+              "winnerId": "zd160gtsmr2iwjuj"
+            },
+            {
+              "id": "match-1782937420085-16",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "nina",
+              "character2Id": "steve",
+              "winnerId": "853qbmfqmr2iwgwc"
+            },
+            {
+              "id": "match-1782937420085-17",
+              "player1Id": "853qbmfqmr2iwgwc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "nina",
+              "character2Id": "heihachi",
+              "winnerId": "zd160gtsmr2iwjuj"
+            },
+            {
+              "id": "match-1782937420085-18",
+              "player1Id": "ecuotzbbmr2iwhzc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "hwoarang",
+              "character2Id": "jin",
+              "winnerId": "ecuotzbbmr2iwhzc"
+            },
+            {
+              "id": "match-1782937420085-19",
+              "player1Id": "ecuotzbbmr2iwhzc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "hwoarang",
+              "character2Id": "steve",
+              "winnerId": "zd160gtsmr2iwjuj"
+            },
+            {
+              "id": "match-1782937420085-20",
+              "player1Id": "ecuotzbbmr2iwhzc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "hwoarang",
+              "character2Id": "heihachi",
+              "winnerId": "ecuotzbbmr2iwhzc"
+            },
+            {
+              "id": "match-1782937420085-21",
+              "player1Id": "ecuotzbbmr2iwhzc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "bryan",
+              "character2Id": "jin",
+              "winnerId": "zd160gtsmr2iwjuj"
+            },
+            {
+              "id": "match-1782937420085-22",
+              "player1Id": "ecuotzbbmr2iwhzc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "bryan",
+              "character2Id": "steve",
+              "winnerId": "ecuotzbbmr2iwhzc"
+            },
+            {
+              "id": "match-1782937420085-23",
+              "player1Id": "ecuotzbbmr2iwhzc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "bryan",
+              "character2Id": "heihachi",
+              "winnerId": "ecuotzbbmr2iwhzc"
+            },
+            {
+              "id": "match-1782937420085-24",
+              "player1Id": "ecuotzbbmr2iwhzc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "law",
+              "character2Id": "jin",
+              "winnerId": "zd160gtsmr2iwjuj"
+            },
+            {
+              "id": "match-1782937420085-25",
+              "player1Id": "ecuotzbbmr2iwhzc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "law",
+              "character2Id": "steve",
+              "winnerId": "zd160gtsmr2iwjuj"
+            },
+            {
+              "id": "match-1782937420085-26",
+              "player1Id": "ecuotzbbmr2iwhzc",
+              "player2Id": "zd160gtsmr2iwjuj",
+              "character1Id": "law",
+              "character2Id": "heihachi",
+              "winnerId": "zd160gtsmr2iwjuj"
+            }
+          ],
+          "crownOverrides": {}
         }
       ]
     }
   ],
   "activeSeasonId": "w3stgbvpmq8gam67",
-  "activeTournamentId": "ah5im8iqmr13z878",
-  "activeView": "matches",
+  "activeTournamentId": "kotkajtmmr2iwfrc",
+  "activeView": "seasons",
   "globalCrownOverrides": {},
   "playerHistory": [
     {
