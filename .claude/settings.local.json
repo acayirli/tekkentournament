@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:www.gameuidatabase.com)",
+      "WebFetch(domain:tekken.fandom.com)",
+      "WebFetch(domain:www.fightersgeneration.com)",
+      "WebFetch(domain:tekken.com)",
+      "WebFetch(domain:en.bandainamcoent.eu)",
+      "WebFetch(domain:tekkenwarehouse.com)",
+      "Bash(npm create vite@latest . -- --template react-ts 2>&1 | tail -5)",
+      "Bash(npm create vite@latest tekken-tmp -- --template react-ts 2>&1 | tail -10)",
+      "Bash(cp -r tekken-tmp/* tekken-tmp/.* . 2>/dev/null; rm -rf tekken-tmp task.md)",
+      "Bash(npm install && npm install zustand express cors && npm install -D @types/express @types/cors tsx 2>&1 | tail -10)",
+      "Bash(npx tsc -b 2>&1)",
+      "Bash(npx vite build 2>&1)",
+      "Bash(npm install -D concurrently 2>&1 | tail -3)",
+      "Bash(curl -s -o /workspace/work/public/characters/jin.jpg -w \"%{http_code}\" \"https://p325k7wa.twic.pics/high/tekken/tekken-8/00-page-setup/characters/jin-702x702.jpg\")",
+      "Bash(npx tsc *)",
+      "Bash(echo \"exit: $?\")"
+    ]
+  }
+}
