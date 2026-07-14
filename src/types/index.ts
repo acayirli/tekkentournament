@@ -41,7 +41,7 @@ export interface PlayerPreset {
   characterIds: string[];
 }
 
-export type ViewTab = "setup" | "matches" | "seasons";
+export type ViewTab = "setup" | "matches" | "seasons" | "statistics";
 
 export interface AppData {
   seasons: Season[];
@@ -50,6 +50,9 @@ export interface AppData {
   activeView: ViewTab;
   globalCrownOverrides: Record<string, number>;
   playerHistory: PlayerPreset[];
+  // Epoch ms of the last mutation. Used to reconcile localStorage vs. backend
+  // on load so the freshest copy always wins (never blindly overwritten).
+  updatedAt?: number;
 }
 
 export interface SequentialMatchInfo {

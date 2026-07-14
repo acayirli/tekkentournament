@@ -5,6 +5,7 @@ import { Sidebar } from "./components/Layout/Sidebar";
 import { PlayerSetup } from "./components/PlayerSetup/PlayerSetup";
 import { MatchViewContainer } from "./components/MatchMatrix/MatchViewContainer";
 import { SeasonManager } from "./components/Seasons/SeasonManager";
+import { StatisticsView } from "./components/Statistics/StatisticsView";
 import { useTournamentStore } from "./store/useTournamentStore";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           {activeView === "setup" && <PlayerSetup />}
           {activeView === "matches" && <MatchViewContainer />}
           {activeView === "seasons" && <SeasonManager />}
+          {activeView === "statistics" && <StatisticsView />}
         </main>
         <Sidebar />
       </div>

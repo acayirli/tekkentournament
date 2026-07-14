@@ -3443,7 +3443,7 @@
   ],
   "activeSeasonId": "w3stgbvpmq8gam67",
   "activeTournamentId": "mrnphtcdmrib8ysb",
-  "activeView": "seasons",
+  "activeView": "matches",
   "globalCrownOverrides": {},
   "playerHistory": [
     {
@@ -3480,5 +3480,5 @@
       ]
     }
   ],
-  "updatedAt": 1784053796208
+  "updatedAt": 1784053778558
 }

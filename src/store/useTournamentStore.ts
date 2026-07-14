@@ -9,7 +9,14 @@ import type {
   PlayerPreset,
 } from "../types";
 import { generateMatches } from "../utils/matchMatrix";
-import { syncToBackend, loadFromBackend } from "../utils/sync";
+import {
+  syncToBackend,
+  loadFromBackend,
+  saveToBackend,
+  flushViaBeacon,
+  setSyncResultListener,
+} from "../utils/sync";
+import { useSyncStatus } from "./useSyncStatus";
 
 function uid(): string {
   return Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
@@ -53,6 +60,7 @@ interface TournamentStore extends AppData {
 
   // Backend sync
   loadFromServer: () => Promise<void>;
+  saveNow: () => Promise<boolean>;
 }
 
 const initialState: AppData = {
@@ -62,7 +70,21 @@ const initialState: AppData = {
   activeView: "setup",
   globalCrownOverrides: {},
   playerHistory: [],
+  updatedAt: 0,
 };
+
+/** Extract the persistable AppData slice from the full store state. */
+function toAppData(s: AppData): AppData {
+  return {
+    seasons: s.seasons,
+    activeSeasonId: s.activeSeasonId,
+    activeTournamentId: s.activeTournamentId,
+    activeView: s.activeView,
+    globalCrownOverrides: s.globalCrownOverrides,
+    playerHistory: s.playerHistory,
+    updatedAt: s.updatedAt ?? 0,
+  };
+}
 
 export const useTournamentStore = create<TournamentStore>()(
   persist(
@@ -286,17 +308,51 @@ export const useTournamentStore = create<TournamentStore>()(
       getActiveTournament: () => getTournament(get()),
 
       loadFromServer: async () => {
-        const data = await loadFromBackend();
-        if (data) {
+        const server = await loadFromBackend();
+        if (!server) return; // backend down / no file — keep local (localStorage)
+
+        const local = get();
+        const localTs = local.updatedAt ?? 0;
+        const serverTs = server.updatedAt ?? 0;
+        const localEmpty =
+          local.seasons.length === 0 && local.playerHistory.length === 0;
+
+        const adoptServer = () =>
           set({
-            seasons: data.seasons,
-            activeSeasonId: data.activeSeasonId,
-            activeTournamentId: data.activeTournamentId,
-            activeView: data.activeView,
-            globalCrownOverrides: data.globalCrownOverrides,
-            playerHistory: data.playerHistory,
+            seasons: server.seasons,
+            activeSeasonId: server.activeSeasonId,
+            activeTournamentId: server.activeTournamentId,
+            activeView: server.activeView,
+            globalCrownOverrides: server.globalCrownOverrides,
+            playerHistory: server.playerHistory,
+            updatedAt: serverTs,
           });
+
+        // 1) Nothing stored locally yet → take whatever the backend has.
+        if (localEmpty) return adoptServer();
+
+        // 2) The backend file carries NO timestamp (old-format file, or a data.json
+        //    freshly pulled from git). We cannot prove it is stale, so we must NOT
+        //    overwrite it from local — treat it as authoritative and adopt it.
+        //    This is the case that previously let a stale localStorage clobber
+        //    freshly-pulled data. When in doubt, the shared file wins, never local.
+        if (serverTs === 0) return adoptServer();
+
+        // 3) Backend is genuinely newer (both timestamps real) → adopt it.
+        if (serverTs > localTs) return adoptServer();
+
+        // 4) Local is strictly newer AND the backend had a real timestamp → the
+        //    backend merely lagged behind this machine's edits. Safe to heal.
+        //    (We only ever overwrite the backend when its timestamp proves it is
+        //    older — never against a timestamp-less/pulled file.)
+        if (localTs > serverTs) {
+          void saveToBackend(toAppData(local));
         }
+        // 5) Equal real timestamps → identical, keep local.
+      },
+
+      saveNow: async () => {
+        return await saveToBackend(toAppData(get()));
       },
     }),
     {
@@ -305,18 +361,38 @@ export const useTournamentStore = create<TournamentStore>()(
   )
 );
 
-// Auto-sync to backend on every state change
-useTournamentStore.subscribe((state) => {
-  const data: AppData = {
-    seasons: state.seasons,
-    activeSeasonId: state.activeSeasonId,
-    activeTournamentId: state.activeTournamentId,
-    activeView: state.activeView,
-    globalCrownOverrides: state.globalCrownOverrides,
-    playerHistory: state.playerHistory,
-  };
-  syncToBackend(data);
+// Auto-sync to backend on every state change. Each change stamps a fresh
+// updatedAt (into both the store and localStorage) so the freshest copy can be
+// identified on the next load. The `stamping` guard prevents the stamp's own
+// setState from recursing.
+// Reflect every backend write result in the UI-only status store, so a failed
+// sync (e.g. backend not running) is visible instead of silently swallowed.
+setSyncResultListener((ok) => {
+  useSyncStatus.getState().markResult(ok, Date.now());
 });
+
+let stamping = false;
+useTournamentStore.subscribe((state) => {
+  if (stamping) return;
+  stamping = true;
+  const updatedAt = Date.now();
+  useTournamentStore.setState({ updatedAt });
+  stamping = false;
+
+  useSyncStatus.getState().markPending();
+  syncToBackend({ ...toAppData(state), updatedAt });
+});
+
+// Best-effort flush of pending edits when the app is closed. The debounced sync
+// may not have fired yet; sendBeacon delivers even during unload so the last
+// edits reach data.json. If it still fails, localStorage reconciles on next load.
+if (typeof window !== "undefined") {
+  const flush = () => flushViaBeacon(toAppData(useTournamentStore.getState()));
+  window.addEventListener("pagehide", flush);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") flush();
+  });
+}
 
 // --- Helpers ---
 

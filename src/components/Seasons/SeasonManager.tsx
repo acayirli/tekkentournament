@@ -2,6 +2,19 @@ import { useTournamentStore } from "../../store/useTournamentStore";
 import { calculateScores } from "../../utils/scoring";
 import type { Season, Tournament } from "../../types";
 
+function formatDateTime(iso: string | undefined): string | null {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return null;
+  return d.toLocaleString("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 function getSeasonLeader(season: Season): string | null {
   const totals: Record<string, number> = {};
   for (const t of season.tournaments) {
@@ -98,8 +111,15 @@ export function SeasonManager() {
                             onClick={() => setActiveTournament(t.id)}
                           >
                             <div>
-                              <span className="tournament-name">{t.name}</span>
-                              {tLeader && <span className="tournament-leader">👑 {tLeader}</span>}
+                              <div>
+                                <span className="tournament-name">{t.name}</span>
+                                {tLeader && <span className="tournament-leader">👑 {tLeader}</span>}
+                              </div>
+                              {formatDateTime(t.createdAt) && (
+                                <div className="tournament-date">
+                                  {formatDateTime(t.createdAt)}
+                                </div>
+                              )}
                             </div>
                             <div className="tournament-actions">
                               <span className={`badge ${t.isFinalized ? "finalized" : t.matches.length > 0 ? "in-progress" : ""}`}>
